@@ -7,14 +7,16 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/style/base.scss'
 // import axios from 'axios'
-
+import Vant from 'vant';
+import 'vant/lib/index.css';
 import Api from './api/index'
 import Utils from './utils/index'
+
 Vue.prototype.$Api = Api;
 Vue.prototype.$Utils = Utils;
-
 Vue.config.productionTip = false
 Vue.use(Element)
+Vue.use(Vant);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -30,6 +30,10 @@ export default new Router({
         path: '/',
         name: 'Cinema',
         component: () => import('../views/Cinema')
+    },{
+        path: '/DateTime',
+        name: 'DateTime',
+        component: () => import('../views/DateTime')
     }
   ]
 })

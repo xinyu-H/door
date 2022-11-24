@@ -1,1 +1,15 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>mapView</title><link href=./static/css/app.14eb349e0f4d134a25d6035bf1c1e8a1.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.21165b0787586d12eecc.js></script><script type=text/javascript src=./static/js/vendor.c85c66c75b27cec23a9b.js></script><script type=text/javascript src=./static/js/app.2efd438e09585271d180.js></script></body></html>
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>mapView</title><link href=./static/css/app.16b56de46d8bcb13395cfbb9a0908a00.css rel=stylesheet></head><body><div id=app></div><script>var fun = function (doc, win) {
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = () => {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            //这里是假设在750px宽度设计稿的情况下，1rem = 100px；
+            docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+            doc.body.style.fontSize = 100 * (clientWidth / 375) + 'px'
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }
+      fun(document, window)</script><script type=text/javascript src=./static/js/manifest.9f9cdc1d6b14ff73f5fe.js></script><script type=text/javascript src=./static/js/vendor.bdb7a9d053dbd4900d76.js></script><script type=text/javascript src=./static/js/app.ff1af7737534ffbeb69e.js></script></body></html>
