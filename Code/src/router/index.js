@@ -11,9 +11,9 @@ export default new Router({
         name: 'HelloWorld',
         component: HelloWorld
     },{
-        path: '/Test',
-        name: 'Test',
-        component: () => import('../views/test')
+        path: '/RunBox',
+        name: 'RunBox',
+        component: () => import('../views/RunBox')
     },{
         path: '/Index1',
         name: 'Index1',
@@ -30,6 +30,10 @@ export default new Router({
         path: '/',
         name: 'Cinema',
         component: () => import('../views/Cinema')
+    },{
+        path: '/Cinema2',
+        name: 'Cinema2',
+        component: () => import('../views/Cinema2')
     },{
         path: '/DateTime',
         name: 'DateTime',

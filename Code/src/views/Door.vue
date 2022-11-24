@@ -21,6 +21,9 @@ export default {
             controls: null,
             renderer: null,
             isOpenDoor: true,
+            amdLight: null,
+            dirLight: null,
+            ponLight: null,
             // 鼠标位置
             raycaster: '',
             mouse: '',
@@ -54,15 +57,15 @@ export default {
         },
         // 添加灯光
         initLight(){
-            var amdLight = new THREE.AmbientLight('#fff');
-			var dirLight = new THREE.DirectionalLight('#eee')
-			var ponLight = new THREE.PointLight('#eee')
-			// amdLight.castShadow = true
-			amdLight.position.set( 500, 500, 800 )
-			dirLight.position.set( 500, 500, 800 )
-			this.add(amdLight);				// 环境光
-			this.add(ponLight);			// 点光源
-			this.add(dirLight);		// 方向光
+            this.amdLight = new THREE.AmbientLight('#aaa');
+			this.dirLight = new THREE.DirectionalLight('#aaa')
+			this.ponLight = new THREE.PointLight('#aaa')
+			this.amdLight.position.set( 0, 0, 0 )
+			this.dirLight.position.set( 0, 0, 0 )
+            this.ponLight.position.set( 0, 0, 0 )
+			this.add(this.amdLight);		    // 环境光
+			this.add(this.dirLight);		    // 方向光
+			this.add(this.ponLight);			// 点光源
         },
         // 渲染器
         initRenderer(){
@@ -165,6 +168,8 @@ export default {
             this.scene.add(obj);
         },
         render () {
+            let vector = this.camera.position.clone();
+            this.ponLight.position.set(vector.x,vector.y,vector.z); //点光源位置
             this.renderer.render(this.scene, this.camera);
             TWEEN.update();
             requestAnimationFrame(this.render);
@@ -172,10 +177,10 @@ export default {
         init () {
             this.initScene()
             this.initCamera()
-            this.initRenderer()
-            this.initControls()
             this.initLight()
             this.initDoor()
+            this.initRenderer()
+            this.initControls()
         }
     },
     mounted(){

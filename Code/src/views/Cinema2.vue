@@ -21,7 +21,7 @@ import TWEEN from "tween.js";
 const ThreeBSP = require('three-js-csg')(THREE)
 
 export default {
-    name: 'Cinema',
+    name: 'Cinema2',
     data(){
         return {
             width: 0,
@@ -42,15 +42,20 @@ export default {
             seatNum: 60,
             rowNum: 9,
             active: 0,
-            centerPoint: 0
+            centerPoint: 0,
+            lookAtX: 0,
+            lookAtY: 0,
+            lookAtZ: 0,
         }
     },
     methods: {
         toLocation(val, index) {
             let _this = this
             let door = this.scene.getObjectByName('door');
+            let isCenter = true;
             let position = door.rotation;                   // 获取上一次物体的 x, y, z
             let cameraPosition = this.camera.position       // 获取上一次相机的 x, y, z
+            let cameraLookAtPosition = this.camera.lookAt       // 获取上一次相机的 x, y, z
             let row = Math.ceil(val / this.rowNum);         // 点击位置的排
             let col = val % this.rowNum === 0 ? this.rowNum : val % this.rowNum;        // 点击位置的列
             let centerPointRow = Math.ceil(this.centerPoint / this.rowNum);             // 中心点的排
@@ -63,6 +68,9 @@ export default {
             let cX = cameraPosition.x
             let cY = cameraPosition.y
             let cZ = cameraPosition.z
+            let lookAtX = 0
+            let lookAtY = 0
+            let lookAtZ = 0
             if(val === this.centerPoint) {
                 x = 0;
                 y = 0;
@@ -70,44 +78,51 @@ export default {
                 cX = 0;
                 cY = 30;
                 cZ = 800;
+                isCenter = true
             } else {
                 if(row < centerPointRow) {
                     x = (centerPointRow - row) * -.1
-                    cY = (centerPointRow - row) * -40
-                    // cZ = 500 - ((centerPointRow - row) * 40)
+                    cY = (centerPointRow - row) * -50
+                    cZ = 800 - ((centerPointRow - row) * 10)
                 } else {
                     x = (row - centerPointRow) * .1
-                    cY = (row - centerPointRow) * 40
-                    // cZ = 500 + ((row - centerPointRow) * 40)
+                    cY = (row - centerPointRow) * 80
+                    cZ = 800 + ((row - centerPointRow) * 10)
                 }
 
                 if(col < centerPointCol) {
                     y = (centerPointCol - col) * .1
-                    cX = (centerPointCol - col) * 30
+                    cX = (centerPointCol - col) * -40
                 } else {
                     y = (col - centerPointCol) * -.1
-                    cX = (col - centerPointCol) * -30
+                    cX = (col - centerPointCol) * 40
                 }
-                // cZ = 500 + ((row - centerPointRow) * 100)
+                isCenter = false;
             }
-            console.log(cX, cY, cZ)
+            // console.log(x, y, z)
+            // console.log(cX, cY, cZ)
+            // console.log(lookAtX, lookAtY, lookAtZ)
             // console.log(val, this.centerPoint , row+'排', col+'列', centerPointRow+'排', centerPointCol+'列')
             
-            // 对物体进行旋转
-            let openDoor = new TWEEN.Tween({
-                x: position.x,
-                y: position.y,
-                z: position.z
-            }).to({ x, y, z }, 500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
-                door.rotation.set(this.x, this.y, this.z);
-            }).start();
-            // 对相机进行旋转
+            // 对物体进行转动
+            // let openDoor = new TWEEN.Tween({
+            //     x: position.x,
+            //     y: position.y,
+            //     z: position.z
+            // }).to({ x, y, z }, 500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+            //     door.rotation.set(this.x, this.y, this.z);
+            // }).start();
+            // 对相机进行转动
             let openCamera = new TWEEN.Tween({
                 cX: cameraPosition.x,
                 cY: cameraPosition.y,
-                cZ: cameraPosition.z
-            }).to({ cX, cY, cZ }, 500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+                cZ: cameraPosition.z,
+                lookAtX,
+                lookAtY,
+                lookAtZ,
+            }).to({ cX, cY, cZ, lookAtX, lookAtY, lookAtZ }, 500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
                 _this.camera.position.set(this.cX, this.cY, this.cZ);
+                _this.camera.lookAt(this.lookAtX, this.lookAtY, this.lookAtZ)
             }).start();
 
             this.active = index
@@ -128,7 +143,7 @@ export default {
         // 相机
         initCamera(){
             this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.01, 10000);
-            this.camera.position.set(0,30,800);
+            this.camera.position.set(0, 30, 800);
             this.add(this.camera);
             this.camera.lookAt(this.scene.position);
         },
@@ -185,6 +200,10 @@ export default {
                 _this.add(_this.dummy);
                 // window.addEventListener("click", _this.onClick, false);
             })
+            this.addBox(10, 10, 1600, '#aaa', -695, 360, 0)
+            this.addBox(10, 10, 1600, '#aaa', 695, 360, 0)
+            this.addBox(10, 10, 1600, '#aaa', 695, -430, 0)
+            this.addBox(10, 10, 1600, '#aaa', -695, -430, 0)
         },
         // 物体点击事件
         onClick(event){
