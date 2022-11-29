@@ -13,6 +13,7 @@
     "axios": "^0.22.0",
     "dat.gui": "^0.7.9",
     "element-ui": "^2.15.6",
+    "indexdbwrapper": "^1.0.4",
     "three": "^0.124.0",
     "three-css2drender": "^1.0.0",
     "three-js-csg": "^72.0.0",

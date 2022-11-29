@@ -55,7 +55,6 @@ export default {
             let isCenter = true;
             let position = door.rotation;                   // 获取上一次物体的 x, y, z
             let cameraPosition = this.camera.position       // 获取上一次相机的 x, y, z
-            let cameraLookAtPosition = this.camera.lookAt       // 获取上一次相机的 x, y, z
             let row = Math.ceil(val / this.rowNum);         // 点击位置的排
             let col = val % this.rowNum === 0 ? this.rowNum : val % this.rowNum;        // 点击位置的列
             let centerPointRow = Math.ceil(this.centerPoint / this.rowNum);             // 中心点的排

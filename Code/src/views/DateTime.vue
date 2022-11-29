@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
     name: 'DateTime',
     data () {
@@ -56,12 +57,12 @@ export default {
             // 两个时间都输入了
             if(this.startDate.trim() && this.endDate.trim()) {
                 if(!this.checkDate(this.startDate.trim()) || !this.checkDate(this.endDate.trim())) {
-                    return vant.Toast('你输入的时间格式不对')
+                    return Toast('你输入的时间格式不对')
                 }
                 this.getDateTime(this.startDate, this.endDate)
             } else {
                 if(!this.checkDate(this.startDate.trim() || this.endDate.trim())) {
-                    return vant.Toast('你输入的时间格式不对')
+                    return Toast('你输入的时间格式不对')
                 }
                 this.getDateTime(this.startDate || this.endDate)
                 if(val) {
@@ -121,7 +122,7 @@ export default {
         width: 100%;
         padding: .1rem;
         box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(150, 150, 150, 0.6);
-        border-radius: .1rem;
+        border-radius: .06rem;
     }
     .app-top .app-content {
         width: 100%;

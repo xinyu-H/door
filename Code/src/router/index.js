@@ -27,7 +27,7 @@ export default new Router({
         name: 'Index3',
         component: () => import('../views/index3')
     },{
-        path: '/',
+        path: '/Cinema',
         name: 'Cinema',
         component: () => import('../views/Cinema')
     },{
@@ -38,6 +38,10 @@ export default new Router({
         path: '/DateTime',
         name: 'DateTime',
         component: () => import('../views/DateTime')
+    },{
+        path: '/',
+        name: 'IndexDB',
+        component: () => import('../views/IndexDB')
     }
   ]
 })
