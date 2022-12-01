@@ -13,6 +13,7 @@
     "axios": "^0.22.0",
     "dat.gui": "^0.7.9",
     "element-ui": "^2.15.6",
+    "file-saver": "^2.0.5",
     "indexdbwrapper": "^1.0.4",
     "three": "^0.124.0",
     "three-css2drender": "^1.0.0",
@@ -23,7 +24,8 @@
     "vant": "^2.5.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "3.6.0"
+    "vuex": "3.6.0",
+    "xlsx": "^0.16.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

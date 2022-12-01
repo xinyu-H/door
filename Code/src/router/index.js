@@ -39,9 +39,17 @@ export default new Router({
         name: 'DateTime',
         component: () => import('../views/DateTime')
     },{
-        path: '/',
+        path: '/IndexDB',
         name: 'IndexDB',
         component: () => import('../views/IndexDB')
+    },{
+        path: '/Css1',
+        name: 'Css1',
+        component: () => import('../views/Css1')
+    },{
+        path: '/',
+        name: 'Table',
+        component: () => import('../views/Table')
     }
   ]
 })
