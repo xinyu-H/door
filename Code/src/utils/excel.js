@@ -1,3 +1,5 @@
+// npm install file-saver
+// npm install xlsx@0.16.0 --save
 import FileSaver from "file-saver";
 import XLSX from "xlsx";
 
